@@ -1,0 +1,53 @@
+{% extends "bootstrap_responsive.html" %}
+
+{% block body_content %}
+
+{% include "header.html" %}
+
+<div class="container">
+	<div class="row">
+		<div class="span2"></div>
+		<div class="span8">
+			<div class="page-header">
+				<h1>アイテム検索<small>検索結果を表示します</small></h1>
+			</div>
+			<div>
+				<h3>検索：【{{ query[0] }}】<small>{{ query[1] }}件 見つかりました。</small></h3>
+			</div>
+			<div>
+				<div class="page-header well">
+					amazonで検索する。
+					<a href="{{ amazon_search }}">【{{ query[0] }}】</a>
+				</div>
+				{%  for item in itemlist %}
+					<div class="row-fluid well" style="width: inherit;">
+						<div class="span3"><img src="/amazon?key={{ item.asin }}" width=130 height=170></div>
+						<div class="span9">
+							<h4><a href="/item/{{ item.asin }}">{{ item.title }}</a></h4>
+							{% if item.author %}
+								{{ item.author }}
+							{% endif %}
+							<br><br><br><br>
+							{% if not item.asin in current_user.handlist %}
+								<a href="/item/{{ item.asin }}/hand" class="btn btn-primary pull-right">この本を持っている
+							{% else %}
+								<a href="/item/{{ item.asin }}/hand" class="btn btn-danger pull-right">この本を破棄する
+							{% endif %}
+								</a>
+						</div>
+					</div>
+				{% endfor %}
+				{% if not itemlist %}
+					<div class="well">
+						<h4>見つかりませんでした。</h4>
+					</div>
+				{% endif %}
+			</div>
+			{% import '/pagination.html' as p %}
+			{{ p.render_pagination(pagination) }}
+		</div>
+		<div class="span2"></div>
+	</div>
+</div><!-- /container -->
+
+{% endblock %}

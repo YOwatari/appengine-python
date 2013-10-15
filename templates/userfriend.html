@@ -1,0 +1,57 @@
+{% extends "bootstrap_responsive.html" %}
+
+{% block body_content %}
+
+{% include "header.html" %}
+
+<div class="container">
+	<div class="row">
+		<div class="span2"></div>
+		<div class="span8">
+			<div class="page-header">
+				<h1>友達リスト<small>友達リストを表示します</small></h1>
+			</div>
+			<div class="row-fluid">
+				<div class="span4 well">
+				
+					{% include "viewuser_profile.html" %}
+					
+				</div>
+				<div class="span8">
+					<div>
+					{%  for friend in friendlist %}
+						<div class="row-fluid well" style="width: inherit;">
+							<div class="span2"><img src="https://graph.facebook.com/{{ friend.uid }}/picture?height=64&width=64" width="64px" height="64px" class="img-polaroid"></div>
+							<div class="span7">
+								<h5>{{ friend.name }}</h5>
+								{% if friend.about != "" and friend.about %}
+									about: {{ friend.about }}<br>
+								{% else %}
+									about: 未設定<br>
+								{% endif %}
+								{% if friend.location != "" and friend.location %}
+									location: {{ friend.location }}<br>
+								{% else %}
+									location: 未設定<br>
+								{% endif %}
+							</div>
+							<div class="span3">
+								<ul class="nav nav-tabs nav-stacked">
+									<li><a href="{{ friend.fb_url }}">fb_link</a></li>
+									<li><a href="/user/{{ friend.uid }}/hands">持ち物<div class="pull-right">({{ friend.handlist|length }})</div></a></li>
+									<li><a href="/user/{{ friend.uid }}/friends">友達<div class="pull-right">({{ friend.friendlist|length }}/{{ friend.fb_friends }})</div></a></li>
+								</ul>
+							</div>
+						</div>
+					{% endfor %}
+					</div>
+					{% import '/pagination.html' as p %}
+					{{ p.render_pagination(pagination) }}
+				</div>
+			</div>
+		</div>
+		<div class="span2"></div>
+	</div>
+</div><!-- /container -->
+
+{% endblock %}

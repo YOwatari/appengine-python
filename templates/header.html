@@ -1,0 +1,49 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<a class="brand" href="/">市川研アプリ班</a>
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li class="divider-vertical"></li>
+					<li><a href="/"><i class="icon-home icon-white"></i> Home</a></li>
+					<li><a href="/about"><i class="icon-info-sign icon-white"></i> About</a></li>
+					<!--
+					<li><a href="#contact"><i class="icon-envelope icon-white"></i> Contact</a></li>
+					-->
+				</ul>
+				<ul class="nav pull-right">
+				{% if current_user %}
+					<li>
+						<form class="navbar-search pull-left" action="/search" method="GET">
+							<i class="icon-search icon-white" style="margin-top: 4px; "></i>
+							<input type="text" class="search-query" name="q" placeholder="Item Search">
+						</form>
+					</li>
+					<li class="divider-vertical"></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 0;">
+						<span style="padding: 0px 15px; height: 40px;">
+							<img src="https://graph.facebook.com/{{ current_user.uid }}/picture?height=30&width=30" width="30px" height="30px" style="padding: 5px 0px; display: inline;">
+							<span style="display: inline; vertical-align: middle;">{{ current_user.name }}</span>
+							<b class="caret" style="vertical-align: middle; margin-top:  auto;"></b>
+						</span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/user/{{ current_user.uid }}/hands">Books</a></li>
+							<li><a href="/user/{{ current_user.uid }}/friends">Friends</a></li>
+							<li class="divider"></li>
+							<li><a href="/logout"><i class="icon-off"></i> Logout</a></li>
+						</ul>
+					</li>
+				{% else %}
+					<li class="active"><a href="/login"><i class="icon-off icon-white"></i> Login</a></li>
+				{% endif %}
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</div>
+</div>

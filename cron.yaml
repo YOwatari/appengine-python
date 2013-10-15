@@ -1,0 +1,12 @@
+cron:
+- description: friendlist update task
+  url: /cron/task/friendlist
+  schedule: every 12 hours
+  timezone: Asia/Tokyo
+  #target: friendlist-update-task
+
+- description: items update task
+  url: /cron/task/items
+  schedule: every day 0:00
+  timezone: Asia/Tokyo
+  #target: items-update-task

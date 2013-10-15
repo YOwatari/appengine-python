@@ -1,0 +1,45 @@
+{% extends "bootstrap_responsive.html" %}
+
+{% block body_content %}
+
+{% include "header.html" %}
+
+<div class="container">
+	<div class="row">
+		<div class="span2"></div>
+		<div class="span8">
+			<div class="page-header">
+				<h1>トップページ<small>ログイン後のトップページ</small></h1>
+			</div>
+			<div class="hero-unit">
+				<h1>ようこそ！</h1>
+				<p>以下のブックマークレットをamazonの商品ベージ(書籍)で使用すると、本サイトのアイテムページへリダイレクトできます。<br>
+					ブックマークレット: <a href="javascript:(function(){if(location.href.search(/[^0-9A-Z]([B0-9][0-9A-Z]{9})([^0-9A-Z]|$)/)!=-1){location.href='http://yowatariapp.appspot.com/item/'+RegExp.$1;}})();">b4apps</a>
+					</p>
+					<pre>
+javascript:(function(){if(location.href.search(/[^0-9A-Z]([B0-9][0-9A-Z]{9})([^0-9A-Z]|$)/)!=-1){location.href='http://yowatariapp.appspot.com/item/'+RegExp.$1;}})();
+					</pre>
+			</div>
+			<div class="hero-unit">
+				<h3>使い方</h3>
+				<h4>・Step 0</h4>
+				<small>ブックマークレットをブックマークバーへドラッグアンドドロップします。<br>
+				この作業は最初に行うだけで大丈夫です。<br></small>
+				<img src="{{ url_for('static', filename='images/1step.png') }}">
+				<br><br>
+				<h4>・Step 1</h4>
+				<small>Amazonの商品ページでブックマークレットを実行します。<br></small>
+				<img src="{{ url_for('static', filename='images/2step.png') }}">
+				<br><br>
+				<h4>・Step 2</h4>
+				<small>当サイトのアイテムページへ飛ぶので、「この本を持っている」をクリック。<br></small>
+				<img src="{{ url_for('static', filename='images/3step.png') }}">
+				<br><br>
+				<small>以上で所有情報を登録できます。</small>
+			</div>
+		</div>
+		<div class="span2"></div>
+	</div>
+</div><!-- /container -->
+
+{% endblock %}

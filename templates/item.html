@@ -1,0 +1,96 @@
+{% extends "bootstrap_responsive.html" %}
+
+{% block body_content %}
+
+{% include "header.html" %}
+
+<div class="container">
+	<div class="row">
+		<div class="span2"></div>
+		<div class="span8">
+			<div class="page-header">
+				<h1>アイテムページ<small>アイテム情報を表示します</small></h1>
+			</div>
+			<div>
+			<div class="row-fluid well" style="width: inherit;">
+				<div class="span3">
+					{% if item.pic_url%}
+						<img src="/amazon?key={{ item.asin }}">
+					{% else %}
+						<img src="{{ url_for('static', filename='images/no_image.png')}}">
+					{% endif %}
+				</div>
+				<div class="span7">
+					<h3>{{ item.title }}</h3>
+					{% if item.authors %}
+						{% for author in item.authors %}
+							{{ author }}(著)
+							{% if loop.index != item.authors|length %}
+								,
+							{% endif %}
+						{% endfor %}
+					{% endif %}
+					<br>
+					{% if item.creators %}
+						{% for creator in item.creators %}
+							{{ creator.name }}({{creator.role}})
+							{% if loop.index != item.creators|length %}
+								,
+							{% endif %}
+						{% endfor %}
+					{% endif %}
+					<br><br>
+					{% if item.price %}
+						価格：￥{{ "{:,d}".format(item.price) }}
+					{% endif %}<br>
+					{% if item.publisher %}
+						出版社：{{ item.publisher }}
+						{% if item.publicationdate %}
+							 ({{ item.publicationdate }})
+						{% endif %}
+					{% endif %}<br>
+					{% if item.binding %}
+						{{ item.binding }}
+						{% if item.pages %}
+							：{{ item.pages }} ページ
+						{% endif %}
+					{% endif %}
+				</div>
+				<div class="span2">
+					<a href={{ item.url }} class="btn">Amazonで<br>購入する</a><br><br>
+					{% if item.asin in  current_user.handlist %}
+						<a href="/item/{{ item.asin }}/hand" class="btn btn-danger">この本を<br>破棄する
+					{% else %}
+						<a href="/item/{{ item.asin }}/hand" class="btn btn-primary">この本を<br>持っている
+					{% endif %}
+					</a><br>
+					</form>
+				</div>
+			</div>
+			<h4>Amazon Recommendation</h4>
+			<div class="row-fluid well" style="width: inherit;">
+				{% if similaritems %}
+					{% for similaritem in similaritems %}
+						<div class="span2">
+							<a href="/item/{{ similaritem.asin }}">
+								<img src="/amazon?key={{ similaritem.asin }}">
+							{{ similaritem.title }}
+							</a><br>
+							{% if similaritem.authors %}
+								{{ similaritem.authors[0] }}
+								{% if similaritem.authors[1] %}
+									, 他 ...
+								{% endif %}
+							{% endif %}
+						</div>
+					{% endfor %}
+				 {% else %}
+					<small> Amazonによるオススメ書籍はありません。</small>
+				{% endif %}
+			</div>
+			</div>
+		</div>
+	</div>
+</div><!-- /container -->
+
+{% endblock %}

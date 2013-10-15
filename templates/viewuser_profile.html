@@ -1,0 +1,20 @@
+<img src="https://graph.facebook.com/{{ view_user.uid }}/picture?height=128&width=128" width="128px" height="128px" class="img-polaroid" style="display: block; margin-left: auto; margin-right: auto; text-align: center;">
+<h4>{{ view_user.name }} <a href="{{ view_user.fb_url }}" class="pull-right">fb_link</a></h4>
+about: <br>
+{% if view_user.about  != "" and view_user.about %}
+	{{ view_user.about }}
+{% else %}
+	未設定
+{% endif %}
+<br>
+location: <br>
+{% if view_user.locaiton != ""  and view_user.location %}
+	{{ view_user.location }}
+{% else %}
+	未設定
+{% endif %}
+<br><p>
+<ul class="nav nav-pills nav-stacked">
+	<li {% if request.endpoint == 'user_handlist' %} class='active' {% endif %} ><a href="/user/{{ view_user.uid }}/hands">Books<div class="pull-right">({{ view_user.handlist|length }})</div></a></li>
+	<li {% if request.endpoint == 'user_friendlist' %} class='active' {% endif %} ><a href="/user/{{ view_user.uid }}/friends">Friends<div class="pull-right">({{ view_user.friendlist|length }}/{{ view_user.fb_friends }})</div></a></li>
+</ul>

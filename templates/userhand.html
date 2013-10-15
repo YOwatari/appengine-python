@@ -1,0 +1,62 @@
+{% extends "bootstrap_responsive.html" %}
+
+{% block body_content %}
+
+{% include "header.html" %}
+
+<div class="container">
+	<div class="row">
+		<div class="span2"></div>
+		<div class="span8">
+			<div class="page-header">
+				<h1>所有書籍リスト<small>所有書籍リストを表示します</small></h1>
+			</div>
+			<div class="row-fluid">
+				<div class="span4 well">
+					
+					{% include "viewuser_profile.html" %}
+					
+				</div>
+				<div class="span8">
+					<div>
+					{%  for item in itemlist %}
+						<div class="row-fluid well" style="width: inherit;">
+							<div class="span3">
+								{% if item.pic_url %}
+									<img src="/amazon?key={{ item.asin }}" width=130 height=170>
+								{% else %}
+									<img src="{{ url_for('static', filename='images/no_image.png')}}">
+								{% endif %}
+							</div>
+							<div class="span9">
+								<h5><a href="/item/{{ item.asin }}">{{ item.title }}</a></h5>
+								{% if item.authors %}
+									{% for author in item.authors %}
+										{{ author}}(著)
+										{% if loop.index != item.authors|length %}
+											,
+										{% endif %}
+									{% endfor %}
+								{% endif %}
+								<br><br><br><br>
+								{% if not item.asin in current_user.handlist %}
+									<a href="/item/{{ item.asin }}/hand" class="btn btn-primary pull-right">この本を持っている
+								{% else %}
+									<a href="/item/{{ item.asin }}/hand" class="btn btn-danger pull-right">この本を破棄する
+								{% endif %}
+									</a>
+							</div>
+						</div>
+					{% endfor %}
+					</div>
+					{% import '/pagination.html' as p %}
+					{{ p.render_pagination(pagination) }}
+				</div>
+			</div>
+		</div>
+		<div class="span2">
+		</div>
+	</div>
+</div><!-- /container -->
+
+{% endblock %}

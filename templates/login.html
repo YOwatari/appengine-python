@@ -1,0 +1,26 @@
+{% extends "bootstrap_responsive.html" %}
+
+{% block body_content %}
+
+{% include "header.html" %}
+
+<div class="container">
+	<div class="row">
+		<div class="span2"></div>
+		<div class="span8">
+			<div class="page-header">
+				<h1>ログインページ<small>Facebookアカウントでログインします</small></h1>
+			</div>
+			<div class="hero-unit">
+				<h1>ログイン</h1>
+				<p>
+					Facebookにおけるプロフィール(名前など)とフレンドリストを取得し、利用します。<br>
+				</p>
+				<p><a href="/login" class="btn btn-primary btn-large">Login with Facebook</a></p>
+			</div>
+		</div>
+		<div class="span2"></div>
+	</div>
+</div><!-- /container -->
+
+{% endblock %}

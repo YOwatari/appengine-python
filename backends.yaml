@@ -1,0 +1,20 @@
+backends:
+- name: item2index
+  class: B1
+  options: dynamic
+  instances: 1
+
+#- name: user2index
+#  class: B1
+#  options: dynamic
+#  instances: 1
+
+- name: friendlist-update-task
+  class: B1
+  options: dynamic
+  instances: 2
+
+- name: items-update-task
+  class: B1
+  options: dynamic
+  instances: 2

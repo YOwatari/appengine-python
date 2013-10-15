@@ -1,0 +1,40 @@
+{% extends "bootstrap_responsive.html" %}
+
+{% block body_content %}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=382415631844147";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+{% include "header.html" %}
+
+<div class="container">
+	<div class="row">
+		<div class="span2"></div>
+		<div class="span8">
+			<div class="page-header">
+				<h1>aboutページ<small>このサイトについて</small></h1>
+			</div>
+			<div class="hero-unit">
+				<h1>このサイトについて</h1>
+				<p>当サイトは、電気通信大学 電気通信学部 人間コミュニケーション学科 市川研究室 大渡裕太の卒論製作ための実験データ収集サイトです。<br>
+				当サイトにて収集されたデータは、データを提供した利用者その他の原権利者に帰属するものとし、卒論に使用されることを前提としています。<br>
+				アカウントやデータの削除を始め、要望などありましたら、以下のメールアドレスへご連絡ください。また、コメント欄でも対応いたします。</p>
+				<p>
+					メールアドレス：<br>
+					oowatari.yuuta[a]ichikawa-lab.org<br>
+					[a]を@へ変えて利用してください。
+				</p>
+			</div>
+			<div class="fb-comments" data-href="http://yowatariapp.appspot.com" data-width="470" data-num-posts="5"></div>
+		</div>
+		<div class="span2">
+		</div>
+	</div>
+</div><!-- /container -->
+
+{% endblock %}
